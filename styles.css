@@ -52,4 +52,13 @@ li {
     margin-left: auto;
     margin-right: auto;
     width: 250px;
+    padding: 15px;
+}
+
+#welcome {
+    width: 115px;
+    margin-right: auto;
+    margin-left: auto;
+    border: 1px solid black;
+    padding: 5px;
 }
