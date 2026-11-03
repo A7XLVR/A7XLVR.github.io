@@ -24,3 +24,5 @@ const hours = new Date().getHours() // get the current hour
         const welcome = document.querySelector("#welcome")
         welcome.textContent = "Good Evening"
     }
+
+    localStorage.setItem("It's a secret to everybody.", '"Its not a bands world, its a FANS world" -Joey Jordison')
