@@ -66,3 +66,32 @@ setInterval(() => {
     currentImage++
     showImages()
 }, 5000)
+
+// Get the list from local storage
+const todos = JSON.parse(localStorage.getItem('todo-list')) || []
+const todoList = document.querySelector('.todo-list')
+const todoInput = document.querySelector('#new-todo')
+const addTodoButton = todoInput.nextElementSibling
+
+const renderTodos = () => {
+    todoList.innerHTML = ''
+    todos.forEach(todo => {
+        const li = document.createElement('li')
+        li.textContent = todo.text
+        todoList.append(li)
+    })
+}
+
+renderTodos()
+
+addTodoButton.addEventListener('click', () => {
+    const text = todoInput.value.trim()
+    if (!text) {
+        return
+    }
+
+    todos.push({ text, completed: false })
+    localStorage.setItem('todo-list', JSON.stringify(todos))
+    todoInput.value = ''
+    renderTodos()
+})
