@@ -95,3 +95,30 @@ addTodoButton.addEventListener('click', () => {
     todoInput.value = ''
     renderTodos()
 })
+
+const getRandomPokemon = async () => {
+    const url = 'https://pokeapi.co/api/v2/pokemon/' + Math.floor(Math.random() * 150)
+    const response = await fetch(url)
+    if (!response.ok) {
+        throw new Error(`Pokémon request failed: ${response.status}`)
+    }
+    return await response.json()
+}
+
+const renderPokemon = (pokemonObj) => {
+    const img = document.createElement('img')
+    img.src = pokemonObj.sprites.front_default
+    img.alt = pokemonObj.name
+    document.querySelector('#pokemon').append(img)
+    return pokemonObj
+}
+
+const showRandomPokemon = async () => {
+    const pokemonObj = await getRandomPokemon()
+    renderPokemon(pokemonObj)
+}
+
+showRandomPokemon().catch(error => {
+    console.error('Unable to load a random Pokémon:', error)
+    document.querySelector('#pokemon').textContent = 'Unable to load a Pokémon right now.'
+})
